@@ -19,7 +19,7 @@ import { makeEventListener } from "@solid-primitives/event-listener"
 import { createStore, produce } from "solid-js/store"
 import { DragDropProvider, PointerSensor } from "@dnd-kit/solid"
 import { isSortable, useSortable } from "@dnd-kit/solid/sortable"
-import { AutoScroller, Feedback, PointerActivationConstraints } from "@dnd-kit/dom"
+import { AutoScroller, Feedback, PointerActivationConstraints, Scroller } from "@dnd-kit/dom"
 import { RestrictToVerticalAxis } from "@dnd-kit/abstract/modifiers"
 import { RestrictToElement } from "@dnd-kit/dom/modifiers"
 import { useQuery } from "@tanstack/solid-query"
@@ -1074,6 +1074,7 @@ function HomeProjectList(props: HomeProjectListProps) {
       ]}
       modifiers={[RestrictToVerticalAxis, RestrictToElement.configure({ element: () => listRef })]}
       plugins={(defaults) => [
+        Scroller,
         ...defaults.filter((plugin) => plugin !== AutoScroller && plugin !== Feedback),
         AutoScroller.configure({ acceleration: 8, threshold: { x: 0, y: 0.05 } }),
         Feedback.configure({ dropAnimation: null }),
